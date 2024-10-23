@@ -1,6 +1,30 @@
 import datetime
 import streamlit as st # type: ignore
+import base64
+# Function to encode the local image to Base64
+def get_base64_image(file_path):
+    with open(file_path, "rb") as image_file:
+        encoded = base64.b64encode(image_file.read()).decode()
+    return encoded
 
+# Path to your local image file
+image_path = "./resources/img/bg.jpeg"  # Replace with your local image path
+img_base64 = get_base64_image(image_path)
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url("data:image/jpg;base64,{img_base64}");
+        background-size: cover;
+        background-position: center;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Example Streamlit elements
+st.title("AI Baydin")
 d = st.date_input(
     "မွေးနေ့ ရွေးချယ်ပါ",
     datetime.date(1990, 1, 1),
