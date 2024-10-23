@@ -1,7 +1,12 @@
 import datetime
 import streamlit as st
 
-d = st.date_input("မွေးနေ့ ရွေးချယ်ပါ", datetime.date(1990, 1, 1))
+d = st.date_input(
+    "မွေးနေ့ ရွေးချယ်ပါ",
+    datetime.date(1990, 1, 1),
+    min_value=datetime.date(1920, 1, 1),
+    max_value=datetime.date(2010, 12, 31)
+)
 st.write("ရွေးချယ်ထားသည့် မွေးနေ့ - ", d)
 business = st.selectbox(
     "လုပ်ငန်းအမျိုးအစား ရွေးချယ်ပါ",
@@ -306,3 +311,22 @@ city= st.selectbox(
 )
 
 st.write("ရွေးချယ်ထားသည့်မြို့ - ", city)
+# st.write(" - ", d.day)
+# st.write(" - ", d.month)
+# st.write(" - ", d.year)
+mmyear=d.year-638
+if d.month <= 4:
+       if d.month < 4:
+          mmyear=mmyear-1
+       else:
+            if d.day < 12:
+              mmyear=mmyear-1
+birth_number=mmyear%7
+day_name = d.strftime("%A")
+
+st.write("Day Name:", day_name)
+st.write("Birth Number:", birth_number)
+st.write("MM year:", mmyear)
+
+
+    
