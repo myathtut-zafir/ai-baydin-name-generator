@@ -1,5 +1,5 @@
 import datetime
-import streamlit as st
+import streamlit as st # type: ignore
 
 d = st.date_input(
     "မွေးနေ့ ရွေးချယ်ပါ",
