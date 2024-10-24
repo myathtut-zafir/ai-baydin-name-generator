@@ -6,3 +6,4 @@
 /env/
 .DS_Store
 resources/.DS_Store
+resources/Astro_random_forest_model.h5
