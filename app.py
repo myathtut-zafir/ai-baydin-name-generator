@@ -8,7 +8,7 @@ def get_base64_image(file_path):
     return encoded
 
 # Path to your local image file
-image_path = "./resources/img/bg.jpeg"  # Replace with your local image path
+image_path = "/Users/heinhtetarkarmg/ai-baydin-name-generator/resources/img/bg.jpeg"  # Replace with your local image path
 img_base64 = get_base64_image(image_path)
 st.markdown(
     f"""
@@ -353,4 +353,60 @@ st.write("Birth Number:", birth_number)
 st.write("MM year:", mmyear)
 
 
+
+# To load the model
+import joblib
+import numpy as np
+import pandas as pd
+
+loaded_model = joblib.load('/Users/heinhtetarkarmg/ai-baydin-name-generator/resources/Astro_random_forest_model.h5')
+
+# Function to take a single input and get predictions based on how many times it appears in the dataset
+def test_with_same_input_duplicate_outputs(start_input, end_input):
+    # Convert user input to a DataFrame
+    input_data = pd.DataFrame({'First Consonant': [start_input], 'Last Consonant': [end_input]})
+
+    # Count how many times this input appears in the original dataset
+    duplicate_count = 11
+
+    if duplicate_count == 0:
+        return "Input not found in the dataset."
+
+
+    # Combine numerical 'First Consonant' and encoded Last Consonant'
+    input_combined = pd.concat([input_data['First Consonant'].reset_index(drop=True),
+                                input_data['Last Consonant'].reset_index(drop=True)], axis=1)
+
+
+    # Get predicted probabilities for each class
+    probabilities = loaded_model.predict_proba(input_combined)
+
+    # Randomly select predictions based on probabilities without duplication
+    # First, limit the size to the number of available unique classes to avoid over-selecting
+    unique_classes = np.unique(loaded_model.classes_)
+    selection_size = min(duplicate_count, len(unique_classes))
+
+    # Choose 'selection_size' number of unique predictions
+    top_predictions = np.random.choice(unique_classes, size=selection_size, p=probabilities[0], replace=False)
+
+    return top_predictions
+
+# Example: Test the model with the same input and get outputs based on the number of duplicates
+start_input = 2  # Example user input for 'Start'
+end_input = 5  # Example user input for 'End'
+output_name_list = []
+
+# Call the function to predict the outputs based on the number of duplicates
+predicted_labels = test_with_same_input_duplicate_outputs(start_input, end_input)
+
+# Output the predicted labels or error message
+if isinstance(predicted_labels, str):
+    print(predicted_labels)
+else:
+    for i, label in enumerate(predicted_labels):
+        output_name_list.append(label)
+        
+
+output_name = ', '.join(map(str, output_name_list))
+st.write("Name : ",output_name)
     
