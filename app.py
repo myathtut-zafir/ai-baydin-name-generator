@@ -8,7 +8,7 @@ def get_base64_image(file_path):
     return encoded
 
 # Path to your local image file
-image_path = "./resources/img/bg-2.jpg"
+image_path = "./resources/img/bg-1.jpg"
 img_base64 = get_base64_image(image_path)
 st.markdown(
     f"""
