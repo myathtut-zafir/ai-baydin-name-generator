@@ -4,3 +4,5 @@
 /__pycache__/
 /create/
 /env/
+.DS_Store
+resources/.DS_Store
