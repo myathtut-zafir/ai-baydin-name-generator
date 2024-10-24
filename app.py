@@ -365,7 +365,7 @@ import joblib
 import numpy as np
 import pandas as pd
 
-loaded_model = joblib.load('/Users/heinhtetarkarmg/ai-baydin-name-generator/resources/Astro_random_forest_model.h5')
+loaded_model = joblib.load('./resources/Astro_random_forest_model.h5')
 
 # Function to take a single input and get predictions based on how many times it appears in the dataset
 def test_with_same_input_duplicate_outputs(start_input, end_input):
