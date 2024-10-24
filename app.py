@@ -8,16 +8,22 @@ def get_base64_image(file_path):
     return encoded
 
 # Path to your local image file
-image_path = "./resources/img/bg.jpeg"  # Replace with your local image path
+image_path = "./resources/img/bg-2.jpg"
 img_base64 = get_base64_image(image_path)
 st.markdown(
     f"""
     <style>
+    [data-testid="stVirtualDropdown"] > div {{
+        height: auto !important;
+    }}
     .stApp {{
         background-image: url("data:image/jpg;base64,{img_base64}");
         background-size: cover;
         background-position: center;
     }}
+    .st-bb{{
+background-color:#120f47
+        }}
     </style>
     """,
     unsafe_allow_html=True
@@ -31,7 +37,7 @@ d = st.date_input(
     min_value=datetime.date(1920, 1, 1),
     max_value=datetime.date(2010, 12, 31)
 )
-st.write("ရွေးချယ်ထားသည့် မွေးနေ့ - ", d)
+# st.write("ရွေးချယ်ထားသည့် မွေးနေ့ - ", d)
 business = st.selectbox(
     "လုပ်ငန်းအမျိုးအစား ရွေးချယ်ပါ",
     ("စားသောက်ကုန်", 
@@ -62,7 +68,7 @@ business = st.selectbox(
 "မိတ္တူ လုပ်ငန်း"
 ),
 )
-st.write("ရွေးချယ်ထားသည့် လုပ်ငန်းအမျိုးအစား - ", business)
+# st.write("ရွေးချယ်ထားသည့် လုပ်ငန်းအမျိုးအစား - ", business)
 city= st.selectbox(
     "မြို့ရွေးချယ်ပါ",
     ("ကျိုက်ထို", 
@@ -334,7 +340,7 @@ city= st.selectbox(
 ),
 )
 
-st.write("ရွေးချယ်ထားသည့်မြို့ - ", city)
+# st.write("ရွေးချယ်ထားသည့်မြို့ - ", city)
 # st.write(" - ", d.day)
 # st.write(" - ", d.month)
 # st.write(" - ", d.year)
@@ -348,9 +354,9 @@ if d.month <= 4:
 birth_number=mmyear%7
 day_name = d.strftime("%A")
 
-st.write("Day Name:", day_name)
-st.write("Birth Number:", birth_number)
-st.write("MM year:", mmyear)
+# st.write("Day Name:", day_name)
+# st.write("Birth Number:", birth_number)
+# st.write("MM year:", mmyear)
 
 
     
