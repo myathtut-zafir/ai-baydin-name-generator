@@ -8,16 +8,22 @@ def get_base64_image(file_path):
     return encoded
 
 # Path to your local image file
-image_path = "/Users/heinhtetarkarmg/ai-baydin-name-generator/resources/img/bg.jpeg"  # Replace with your local image path
+image_path = "./ai-baydin-name-generator/resources/img/bg-1.jpg"
 img_base64 = get_base64_image(image_path)
 st.markdown(
     f"""
     <style>
+    [data-testid="stVirtualDropdown"] > div {{
+        height: auto !important;
+    }}
     .stApp {{
         background-image: url("data:image/jpg;base64,{img_base64}");
         background-size: cover;
         background-position: center;
     }}
+    .st-bb{{
+background-color:#120f47
+        }}
     </style>
     """,
     unsafe_allow_html=True
@@ -31,7 +37,7 @@ d = st.date_input(
     min_value=datetime.date(1920, 1, 1),
     max_value=datetime.date(2010, 12, 31)
 )
-st.write("ရွေးချယ်ထားသည့် မွေးနေ့ - ", d)
+# st.write("ရွေးချယ်ထားသည့် မွေးနေ့ - ", d)
 business = st.selectbox(
     "လုပ်ငန်းအမျိုးအစား ရွေးချယ်ပါ",
     ("စားသောက်ကုန်", 
@@ -62,7 +68,7 @@ business = st.selectbox(
 "မိတ္တူ လုပ်ငန်း"
 ),
 )
-st.write("ရွေးချယ်ထားသည့် လုပ်ငန်းအမျိုးအစား - ", business)
+# st.write("ရွေးချယ်ထားသည့် လုပ်ငန်းအမျိုးအစား - ", business)
 city= st.selectbox(
     "မြို့ရွေးချယ်ပါ",
     ("ကျိုက်ထို", 
@@ -89,7 +95,7 @@ city= st.selectbox(
 "အုတ်ဖို", 
 "လောက်ကိုင်", 
 "ပန်းဘဲတန်း", 
-"စဉ့်ကူး", 
+"စဉ့်ကူး", 
 "ညောင်တုန်း", 
 "သန်လျင်", 
 "မိုင်းဖြတ်", 
@@ -114,11 +120,11 @@ city= st.selectbox(
 "မိုင်းရယ်", 
 "ကျောက်ပန်းတောင်း", 
 "ဟားခါး", 
-"ဖားကန့်", 
+"ဖားကန့်", 
 "တောင်သာ", 
 "ဆိပ်ဖြူ", 
 "မယ်စဲ", 
-"ပွင့်ဖြူ", 
+"ပွင့်ဖြူ", 
 "ခရမ်း", 
 "မိုးကောင်း", 
 "မန်တုံ", 
@@ -159,23 +165,23 @@ city= st.selectbox(
 "ကျောက်မဲ", 
 "မင်္ဂလာဒုံ", 
 "ပုဗ္ဗသီရိ", 
-"ကန်ကြီးထောင့်", 
+"ကန်ကြီးထောင့်", 
 "မိုင်းယန်း", 
 "မိုင်းကိုင်", 
 "ဇီးကုန်း", 
-"နမ့်ဆန်", 
+"နမ့်ဆန်", 
 "စစ်ကိုင်း", 
 "ကောလင်း", 
 "နွားထိုးကြီး", 
 "လပွတ္တာ", 
-"တန့်ယန်း", 
+"တန့်ယန်း", 
 "တိုက်ကြီး", 
 "ပေါက်", 
 "ကမာရွတ်", 
 "ထန်းတပင်", 
 "ဟိုတောင်း", 
-"ကြည့်မြင်တိုင်", 
-"ထီးချိုင့်", 
+"ကြည့်မြင်တိုင်", 
+"ထီးချိုင့်", 
 "ဒီးမော့ဆို", 
 "လုံထန်", 
 "ထားဝယ်", 
@@ -191,7 +197,7 @@ city= st.selectbox(
 "ဗန်းမော်", 
 "ပန်ယန်း", 
 "အရာတော်", 
-"စဉ့်ကိုင်", 
+"စဉ့်ကိုင်", 
 "ဘူးသီးတောင်", 
 "သံတောင်ကြီး", 
 "အိုက်ချန်", 
@@ -224,7 +230,7 @@ city= st.selectbox(
 "ကလေး", 
 "လှိုင်", 
 "နန်းယွန်း", 
-"ကန့်ဘလူ", 
+"ကန့်ဘလူ", 
 "နတ်မောက်", 
 "မင်းလှ", 
 "ပျော်ဘွယ်", 
@@ -255,7 +261,7 @@ city= st.selectbox(
 "မိုင်းဆတ်", 
 "နားကောင်", 
 "အောင်လံ", 
-"ရင်ဖန့်", 
+"ရင်ဖန့်", 
 "မိုင်းကာ", 
 "ဇလွန်", 
 "မောက်မယ်", 
@@ -265,7 +271,7 @@ city= st.selectbox(
 "အိမ်မဲ", 
 "မကွေး", 
 "ဖလမ်း", 
-"တန့်ဆည်", 
+"တန့်ဆည်", 
 "ဗဟန်း", 
 "မဘိမ်း", 
 "ကျွန်းလှ", 
@@ -281,7 +287,7 @@ city= st.selectbox(
 "ထန်တလန်", 
 "နာဝီး", 
 "ကြံခင်း", 
-"နမ့် တစ်", 
+"နမ့် တစ်", 
 "ကျိုက်မရော", 
 "ဝက်လက်", 
 "မတူပီ", 
@@ -308,7 +314,7 @@ city= st.selectbox(
 "ဘိုကလေး", 
 "သဲကုန်း", 
 "နတ်တလင်း", 
-"နမ့်စန်", 
+"နမ့်စန်", 
 "မန်မန်ဆိုင်", 
 "မြစ်သား", 
 "ဖျာပုံ", 
@@ -334,7 +340,8 @@ city= st.selectbox(
 ),
 )
 
-st.write("ရွေးချယ်ထားသည့်မြို့ - ", city)
+
+# st.write("ရွေးချယ်ထားသည့်မြို့ - ", city)
 # st.write(" - ", d.day)
 # st.write(" - ", d.month)
 # st.write(" - ", d.year)
@@ -346,20 +353,18 @@ if d.month <= 4:
             if d.day < 12:
               mmyear=mmyear-1
 birth_number=mmyear%7
-day_name = d.strftime("%A")
+day_name = d.strftime("%a").lower()
 
-st.write("Day Name:", day_name)
-st.write("Birth Number:", birth_number)
-st.write("MM year:", mmyear)
-
-
+#st.write("Day Name:", day_name)
+#st.write("Birth Number:", birth_number)
+# st.write("MM year:", mmyear)
 
 # To load the model
 import joblib
 import numpy as np
 import pandas as pd
 
-loaded_model = joblib.load('/Users/heinhtetarkarmg/ai-baydin-name-generator/resources/Astro_random_forest_model.h5')
+loaded_model = joblib.load('./ai-baydin-name-generator/resources/Astro_random_forest_model.h5')
 
 # Function to take a single input and get predictions based on how many times it appears in the dataset
 def test_with_same_input_duplicate_outputs(start_input, end_input):
@@ -391,9 +396,45 @@ def test_with_same_input_duplicate_outputs(start_input, end_input):
 
     return top_predictions
 
+
+import json
+
+# Path to the uploaded JSON file
+file_path = './ai-baydin-name-generator/resources/astro.json'
+
+# Open and read the JSON file
+with open(file_path, 'r', encoding='utf-8') as file:
+    data = json.load(file)  # Parse the JSON data
+
+#remainder dict
+remainder = {
+    0: "remainder0", 
+    1: "remainder1",
+    2: "remainder2",  
+    3: "remainder3",
+    4: "remainder4", 
+    5: "remainder5",  
+    6: "remainder6",   
+}
+
+seven_days = { 
+    1: "တနင်္ဂနွေ",
+    2: "တနင်္လာ",  
+    3: "အင်္ဂါ",
+    4: "ဗုဒ္ဓဟူး", 
+    5: "ကြာသပတေး",  
+    6: "သောကြာ",
+    7: "စနေ",
+}
+
+r = remainder[birth_number]
+
+# # Access "remainder1" -> "sun"
+json_data = data[r][day_name]
+
 # Example: Test the model with the same input and get outputs based on the number of duplicates
-start_input = 2  # Example user input for 'Start'
-end_input = 5  # Example user input for 'End'
+start_input = int(json_data['start_num'])  # Example user input for 'Start'
+end_input = int(json_data['end_num'])  # Example user input for 'End'
 output_name_list = []
 
 # Call the function to predict the outputs based on the number of duplicates
@@ -409,4 +450,9 @@ else:
 
 output_name = ', '.join(map(str, output_name_list))
 st.write("Name : ",output_name)
+st.write(seven_days[int(json_data['start_num'])],"နံနှင့်စပြီး",seven_days[int(json_data['end_num'])],"နံနှင့်ဆုံးသောနာမည်ကိုပေးပါ။")
+st.write("Luck Color: ",json_data['luck_color'])
+st.write("Luck Time: ",json_data['luck_time'])
+st.write("Instruction: ",json_data['instruction'])
+
     
