@@ -1,7 +1,9 @@
 import datetime
 import streamlit as st # type: ignore
 import base64
+import pandas as pd
 
+st.set_page_config(layout="wide")
 
 # Function to encode the local image to Base64
 def get_base64_image(file_path):
@@ -26,11 +28,29 @@ st.markdown(
         }}
     h1{{
         color: white;
-        font-size: 19pt;
-        }}   
-    .stSelectbox > div {{ width: 90% !important; }}
+        font-size: 28pt;
+        }}  
+    h2{{    
+    font-size: 20pt;
+    }}   
+    span{{
+        font-size: 18pt;
+        font-weight:bold;   
+        align:center;
+        }} 
+    .stSelectbox > div {{ width: 70% !important; }}
     
-    .stDateInput > div {{ width: 90% !important; }}
+    .stDateInput > div {{ width: 70% !important; }} 
+
+    .streamlit-expanderHeader {{
+        font-size: 20px;
+        font-weight: bold;
+        color: #4CAF50;  /* Change the header color */
+    }}
+    .streamlit-expanderContent {{
+        background-color: #f9f9f9;  /* Change the background color */
+        padding: 10px;  /* Add padding */
+    }}
     
     </style>
     """,
@@ -38,17 +58,23 @@ st.markdown(
 )
 
 # Example Streamlit elements
-st.title("မြန်မာ့ရိုးရာ ဗေဒင် နည်းပညာဖြင့် လုပ်ငန်းအမည်ပေးခြင်း :gray[AI Baydin] :aries: :taurus: :pisces:")
-         
-col1, col2 = st.columns(2)
+st.markdown("<h1 style='text-align: center; color: white;'>မြန်မာ့ရိုးရာ ဗေဒင် နည်းပညာဖြင့် လုပ်ငန်းအမည်ပေးခြင်း</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: violet;'>AI Baydin ♈ ♉ ♓</h2>", unsafe_allow_html=True)
+#st.header("မြန်မာ့ရိုးရာ ဗေဒင် နည်းပညာဖြင့် လုပ်ငန်းအမည်ပေးခြင်း \n :gray[AI Baydin] :aries: :taurus: :pisces:")
+
+#col1, col2, col3  = st.columns(3)    
+col1, col2 = st.columns([2, 3])
+
 with col1:
     
     d = st.date_input(
-    "မွေးနေ့ ရွေးချယ်ပါ",
-    datetime.date(1990, 1, 1),
-    min_value=datetime.date(1920, 1, 1),
-    max_value=datetime.date(2010, 12, 31)
-)
+        "မွေးနေ့ ရွေးချယ်ပါ",
+        datetime.date(1990, 1, 1),
+        min_value=datetime.date(1920, 1, 1),
+        max_value=datetime.date(2010, 12, 31)
+    )
+#st.markdown('<style>.stSelectbox > div { width: 100% !important; }</style>', unsafe_allow_html=True)
+# st.write("ရွေးချယ်ထားသည့် မွေးနေ့ - ", d)
     business = st.selectbox(
         "လုပ်ငန်းအမျိုးအစား ရွေးချယ်ပါ",
         ["စားသောက်ကုန်", 
@@ -78,8 +104,8 @@ with col1:
     "ပရိဘောဂလုပ်ငန်း", 
     "မိတ္တူ လုပ်ငန်း"
         ]
-    )
-    # st.write("ရွေးချယ်ထားသည့် လုပ်ငန်းအမျိုးအစား - ", business)
+)
+# st.write("ရွေးချယ်ထားသည့် လုပ်ငန်းအမျိုးအစား - ", business)
     city= st.selectbox(
         "မြို့ရွေးချယ်ပါ",
         ("ကျိုက်ထို", 
@@ -350,11 +376,11 @@ with col1:
     "ကွမ်း"
     ),
     )
-    
-    # st.write("ရွေးချယ်ထားသည့်မြို့ - ", city)
-    # st.write(" - ", d.day)
-    # st.write(" - ", d.month)
-    # st.write(" - ", d.year)
+
+# st.write("ရွေးချယ်ထားသည့်မြို့ - ", city)
+# st.write(" - ", d.day)
+# st.write(" - ", d.month)
+# st.write(" - ", d.year)
     mmyear=d.year-638
     if d.month <= 4:
            if d.month < 4:
@@ -365,10 +391,10 @@ with col1:
     birth_number=mmyear%7
     #day_name = d.strftime("%A")
     day_name = d.strftime("%a").lower()
-    
-    # st.write("Day Name:", day_name)
-    st.write("Birth Number:", birth_number)
-    # st.write("MM year:", mmyear)
+
+# st.write("Day Name:", day_name)
+    st.write("မွေးနှစ် အကြွင်း :", birth_number)
+    #st.write("MM year:", mmyear)
 
 
 # To load the model
@@ -385,6 +411,8 @@ def test_with_same_input_duplicate_outputs(start_input, end_input):
 
     # Count how many times this input appears in the original dataset
     duplicate_count = 11
+
+    
 
     if duplicate_count == 0:
         return "Input not found in the dataset."
@@ -452,19 +480,71 @@ output_name_list = []
 # Call the function to predict the outputs based on the number of duplicates
 predicted_labels = test_with_same_input_duplicate_outputs(start_input, end_input)
 
+ 
+
+bussiness_type = {
+        1: "စားသောက်ကုန်",
+        2: "ဆေးဝါး",
+        3: "စက်ပစ္စည်း (ကား၊ ကွန်ပြူတာ ၊ စက်ပစ္စည်း အမျိုးမျိုး )",
+        4: "လူသုံးကုန်",
+        5: "အဝတ်အထည်",
+        6: "အလှကုန်",
+        7: "လောင်စာဆီ",
+        8: "ပို့ဆောင်ရေး",
+        9: "ဆက်သွယ်ရေး",
+        10: "ဆေးရုံဆေးခန်း",
+        11: "စားသောက်ဆိုင်",
+        12: "ဖုန်းဆိုင်",
+        13: "ဥပဒေ အကြံပေး",
+        14: "မီးသတ်ပစ္စည်းဆိုင်",
+        15: "အိမ်ဆောက်ပစ္စည်းဆိုင်",
+        16: "အလှပြင်ဆိုင်၊ ဆံပင်ညှပ်ဆိုင်",
+        17: "ပန်း ၊ ပန်းအလှဆင်",
+        18: "နာရေးပစ္စည်းဆိုင်",
+        19: "Animal Service",
+        20: "ဖက်ရှင်ဆိုင်",
+        21: "နိဗ္ဗန်ကုန်",
+        22: "အကျိုးဆောင်",
+        23: "ပွဲရုံလုပ်ငန်း",
+        24: "ခရီးသွားလုပ်ငန်း",
+        25: "ပရိဘောဂလုပ်ငန်း",
+        26: "မိတ္တူ လုပ်ငန်း",
+        27: "ပညာရေး",
+    }
+# Find key(s) corresponding to the target value
+b_type_key = [key for key, value in bussiness_type.items() if value == business]
+b_type_key_int = int(b_type_key[0])
+
+
 # Output the predicted labels or error message
 if isinstance(predicted_labels, str):
     print(predicted_labels)
 else:
     for i, label in enumerate(predicted_labels):
-        output_name_list.append(label)
+        # Load the Bussiness type data
+        file_path = './ai-baydin-name-generator/resources/Astro - B-type.csv'
+        b_type_data = pd.read_csv(file_path)
+        
+        # Find the row index where the value  is in Column
+        row_index = b_type_data.loc[b_type_data['Name'] == label].index
+        
+        # Select value from the second column of a specific row
+        value = b_type_data.loc[row_index, 'Invalid'].values[0]
+        list_values =  [int(x) for x in value.split(',')]
+        # Check if  exists in the list
+        if b_type_key_int not in list_values:
+            output_name_list.append(label)  # Append the value if  does not exist
+        
+        
         
 
 output_name = ', '.join(map(str, output_name_list))
-
 with col2:
-    st.write("Name : ",output_name)
-    st.write(seven_days[int(json_data['start_num'])],"နံနှင့်စပြီး",seven_days[int(json_data['end_num'])],"နံနှင့်ဆုံးသောနာမည်ကိုပေးပါ။")
-    st.write("Luck Color: ",json_data['luck_color'])
-    st.write("Luck Time: ",json_data['luck_time'])
-    st.write("Instruction: ",json_data['instruction'])
+    with st.expander(" ",expanded=True):        
+    #st.write("  ")
+#with col3:
+        st.write("အဆိုပြု လုပ်ငန်းအမည် : ",output_name)
+        st.write(seven_days[int(json_data['start_num'])],"နံ နှင့်စပြီး",seven_days[int(json_data['end_num'])],"နံ နှင့်ဆုံးသော လုပ်ငန်း အမည်ကိုပေးပါ။")
+        st.write("ကံကောင်းစေသော အရောင် : ",json_data['luck_color'])
+        st.write("မင်္ဂလာ အချိန် : ",json_data['luck_time'])
+        st.write("ဆောင်ရန်၊ ရှောင်ရန် : ",json_data['instruction'])
